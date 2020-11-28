@@ -1,7 +1,7 @@
 import java.lang.*;
 
 /**
- * Matrix multiplication for fibonaci-like problems
+ * Matrix exponentiation for fibonaci-like problems
  * |1 1| ^ n     | F n+1   F n   |
  * |1 1|      =  | F n     F n+1 |
  */
