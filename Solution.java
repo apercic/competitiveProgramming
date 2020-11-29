@@ -1,37 +1,59 @@
 import java.lang.*;
+import java.util.Scanner;
 
 /**
- * Matrix exponentiation for fibonaci-like problems
- * |1 1| ^ n     | F n+1   F n   |
- * |1 1|      =  | F n     F n+1 |
+ * Solution to My Fair Coins CodeChef problem (CSUMD)
+ *
+ * Matrix multiplication
+ * |F(n)  |    |a b c |   |F(n-1)|
+ * |F(n-1)|  = |1 0 0 | * |F(n-2)|
+ * |F(n-2)|    |0 1 0 |   |F(n-3)|
+ *
+ * F(n) = a*F(n-1) + b*F(n-2) + c*F(n-3)
+ *
+ * (only two dimensions in this example)
  */
 class Solution {
-    static int fib(int n) {
-        int F[][] = new int[][]{{1, 1}, {1, 0}};
-        if (n == 0) return 0;
-        power(F, n - 1);
-        return F[0][0];
+    static long mod = 1000000007L;
+
+    public static void multiplyMatrices(long[][] firstMatrix, long[][] secondMatrix) {
+        long[][] product = new long[2][2];
+        for(int i = 0; i < 2; i++)
+            for (int j = 0; j < 2; j++)
+                for (int k = 0; k < 2; k++)
+                    product[i][j] += (firstMatrix[i][k] * secondMatrix[k][j])%mod;
+
+        for(int i = 0; i < 2; i++)
+            for (int j = 0; j < 2; j++)
+                firstMatrix[i][j] = product[i][j];
+
     }
 
-    static void multiply(int F[][], int M[][]) {
-        int x = F[0][0] * M[0][0] + F[0][1] * M[1][0];
-        int y = F[0][0] * M[0][1] + F[0][1] * M[1][1];
-        int z = F[1][0] * M[0][0] + F[1][1] * M[1][0];
-        int w = F[1][0] * M[0][1] + F[1][1] * M[1][1];
-        F[0][0] = x;
-        F[0][1] = y;
-        F[1][0] = z;
-        F[1][1] = w;
-    }
+    static long[][] rec(long n) {
+        //n = power to which we rise the matrix
+        long [][] a = {{2,2},{1,0}};
+        long [][] b = {{1,0},{0,1}}; //identity matrix
 
-    static void power(int F[][], int n) {
-        int i;
-        int M[][] = new int[][]{{1, 1}, {1, 0}};
-        for (i = 2; i <= n; i++) multiply(F, M);
+        while (n > 0) {
+            if (n % 2 == 1)
+                multiplyMatrices(b,a);
+            multiplyMatrices(a, a);
+            n /= 2;
+        }
+        return b;
     }
 
     public static void main(String args[]) {
-        int n = 9;
-        System.out.println(fib(n));
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        for (int i = 0; i < T; i++) {
+            long N  = sc.nextLong();
+
+            if (N == 1) System.out.println(1);
+            else {
+                long[][] a = rec(N-2);
+                System.out.println((3*a[0][0]+a[0][1])%mod);
+            }
+        }
     }
 }
