@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 /**
  * Solution to 'Fibonacci Inspiration' CodeChef problem (IEMCO8F)
- * <p>
+ * 
  * Matrix multiplication
  * f(N)=a⋅f(N−1)+b⋅f(N−2)+c⋅f(N−3)+d⋅f(N−4)+e
- * <p>
+ * 
  * | dp(i)   | = | a b c d 1 | x | dp(i-1) |
  * | dp(i-1) |   | 1 0 0 0 0 |   | dp(i-2) |
  * | dp(i-2) |   | 0 1 0 0 0 |   | dp(i-3) |

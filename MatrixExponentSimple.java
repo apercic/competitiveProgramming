@@ -2,7 +2,7 @@ import java.lang.*;
 import java.util.Scanner;
 
 /**
- * Solution to My Fair Coins CodeChef problem (CSUMD)
+ * Solution to 'My Fair Coins' CodeChef problem (CSUMD)
  *
  * Matrix multiplication
  * |F(n)  |    |a b c |   |F(n-1)|
