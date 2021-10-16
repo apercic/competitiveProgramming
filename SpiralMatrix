@@ -1,0 +1,39 @@
+package amazon_interviews;
+
+public class SpiralMatrix {
+
+    public static void main(String[] args) {
+        int n = 5;
+        int[][] matrix = new int[n][n];
+        int zacetek = 0;
+        int konec = n - 1;
+
+        int count = 1;
+        while (zacetek < konec) {
+            for (int i = zacetek; i < konec; i++) {
+                matrix[zacetek][i] = count;
+                count++;
+            }
+            for (int i = zacetek; i < konec; i++) {
+                matrix[i][konec] = count;
+                count++;
+            }
+            for (int i = konec; i > zacetek; i--) {
+                matrix[konec][i] = count;
+                count++;
+            }
+            for (int i = konec; i > zacetek; i--) {
+                matrix[i][zacetek] = count;
+                count++;
+            }
+            zacetek++;
+            konec--;
+        }
+        if (n % 2 != 0) matrix[n/2][n/2] = n*n;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) System.out.print(matrix[i][j] + " ");
+            System.out.println();
+        }
+    }
+}
